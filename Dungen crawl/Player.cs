@@ -19,10 +19,10 @@ namespace Dungen_crawl
 
         public Player()
         {
-            str = 10;
-            dex = 10;
-            wis = 10;
-            con = 10;
+            str = 15;
+            dex = 15;
+            wis = 15;
+            con = 15;
             exp = 0;
             level = 1;
             sp = 10;
