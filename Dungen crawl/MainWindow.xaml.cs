@@ -24,5 +24,6 @@ namespace Dungen_crawl
         {
             InitializeComponent();
         }
+
     }
 }

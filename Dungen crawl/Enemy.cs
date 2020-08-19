@@ -6,5 +6,6 @@ namespace Dungen_crawl
 {
     class Enemy
     {
+
     }
 }
