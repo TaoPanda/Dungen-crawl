@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Dungen_crawl
 {
-    class Weapon
+    public class Weapon
     {
         private int type;
         private int mod;
         private int hit;
         private int crt;
         private int dmgmod;
-        private Random rnd;
+        private Random rnd = new Random();
 
         public Weapon(int type, int mod, int hitmod, int crtmod, int dmgmod)
         {
@@ -35,7 +35,6 @@ namespace Dungen_crawl
             }
             hit += hitmod;
             crt += crtmod;
-            rnd = new Random();
         }
         public Weapon(int type, int hitmod, int crtmod, int dmgmod)
         {
@@ -59,7 +58,6 @@ namespace Dungen_crawl
             }
             hit += hitmod;
             crt += crtmod;
-            rnd = new Random();
         }
 
         public int Type { get => type; private set => type = value; }

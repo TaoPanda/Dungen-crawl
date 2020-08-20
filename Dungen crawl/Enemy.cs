@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dungen_crawl
 {
-    class Enemy
+    public class Enemy
     {
         private int str;
         private int dex;
@@ -13,20 +13,21 @@ namespace Dungen_crawl
         private int level;
         private int hp;
         private int maxhp;
-        private Random rnd;
         private int type;
-        private Weapon weapon;
+        private string name;
+        Random rnd = new Random();
+        Weapon weapon;
 
-        public Enemy(Player player)
+        public Enemy(int playerLevel)
         {
-            rnd = new Random();
-            if(player.Level < 6)
+            if(playerLevel < 6)
             {
                 type = 1;
             }
-            else if(player.Level < 10)
+            else if(playerLevel < 10)
             {
                 type = rnd.Next(1, 3);
+
             }
             else
             {
@@ -36,11 +37,23 @@ namespace Dungen_crawl
             {
                  weapon = new Weapon(rnd.Next(1, 4), rnd.Next(2), rnd.Next(2), rnd.Next(2));
             }
-            level = rnd.Next(1, player.Level+1);
-            str = rnd.Next(1, level * 10 * type - 5);
-            dex = rnd.Next(1, level * 10 * type - 5);
-            wis = rnd.Next(1, level * 10 * type - 5);
-            con = rnd.Next(1, level * 10 * type - 5);
+            if(type == 1)
+            {
+                Name = "Goblin";
+            }
+            else if(type == 2)
+            {
+                Name = "Orc";
+            }
+            else
+            {
+                Name = "Dragon";
+            }
+            level = rnd.Next(1, playerLevel+1);
+            str = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
+            dex = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
+            wis = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
+            con = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
             hp = 5 * con;
             maxhp = 5 * con;
         }
@@ -53,6 +66,7 @@ namespace Dungen_crawl
         public int Hp { get => hp; private set => hp = value; }
         public int Maxhp { get => maxhp; private set => maxhp = value; }
         public int Type { get => type; private set => type = value; }
+        public string Name { get => name; set => name = value; }
 
         public void CalculateHP(int heal, int dmg)
         {

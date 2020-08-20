@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dungen_crawl
 {
-    class Player
+    public class Player
     {
         private int str;
         private int dex;
@@ -24,7 +24,7 @@ namespace Dungen_crawl
             wis = 15;
             con = 15;
             exp = 0;
-            level = 1;
+            level = 10;
             sp = 10;
             hp = 100;
             levelup = 50;

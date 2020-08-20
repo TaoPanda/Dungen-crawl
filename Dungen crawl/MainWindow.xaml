@@ -7,6 +7,26 @@
         mc:Ignorable="d"
         Title="Dungen crawl" Height="450" Width="800">
     <Grid>
-
+        <Button Content="Attack" HorizontalAlignment="Left" Margin="127,333,0,0" VerticalAlignment="Top" Click="Attack_Click"/>
+        <Button Content="Switch weapon" HorizontalAlignment="Left" Margin="104,362,0,0" VerticalAlignment="Top"/>
+        <Button Content="Sword" HorizontalAlignment="Left" Margin="30,335,0,0" VerticalAlignment="Top"/>
+        <Button Content="Bow" HorizontalAlignment="Left" Margin="35,358,0,0" VerticalAlignment="Top"/>
+        <Button Content="Magic staff" HorizontalAlignment="Left" Margin="17,383,0,0" VerticalAlignment="Top"/>
+        <Button Content="Next room" HorizontalAlignment="Left" Margin="516,147,0,0" VerticalAlignment="Top" Click="NextRoom_Click"/>
+        <Button Content=" + " HorizontalAlignment="Left" Margin="369,310,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.373,-0.749"/>
+        <Button Content=" + " HorizontalAlignment="Left" Margin="369,335,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="396,387,0,0" Text="Con" Name="Con" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="396,362,0,0" Text="Wis" Name="Wis" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="396,337,0,0" Text="Dex" Name="Dex" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="396,312,0,0" Text="Str" Name="Str" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button Content=" + " HorizontalAlignment="Left" Margin="369,360,0,0" VerticalAlignment="Top"/>
+        <Button Content=" + " HorizontalAlignment="Left" Margin="369,385,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="130,238,0,0" Text="Player" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="234,349,0,0" Text="HP" Name="Hp" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,111,241,0" Text="" Name="EnemyName1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="524,90,0,0" Text="" Name="EnemyHP1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="564,111,0,0" Text="" Name="EnemyLevel1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="234,335,0,0" Text="Lv" Name="Level" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="349,288,0,0" Text="Sp" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Window>
