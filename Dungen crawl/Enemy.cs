@@ -35,7 +35,7 @@ namespace Dungen_crawl
             }
             if(type < 3)
             {
-                 weapon = new Weapon(rnd.Next(1, 4), rnd.Next(2), rnd.Next(2), rnd.Next(2));
+                 Weapon = new Weapon(rnd.Next(1, 4), rnd.Next(2), rnd.Next(2), rnd.Next(2));
             }
             if(type == 1)
             {
@@ -50,10 +50,10 @@ namespace Dungen_crawl
                 Name = "Dragon";
             }
             level = rnd.Next(1, playerLevel+1);
-            str = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
-            dex = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
-            wis = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
-            con = rnd.Next(1 + 3 * (type - 1), level * 10 * type - 3);
+            str = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
+            dex = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
+            wis = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
+            con = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
             hp = 5 * con;
             maxhp = 5 * con;
         }
@@ -67,6 +67,7 @@ namespace Dungen_crawl
         public int Maxhp { get => maxhp; private set => maxhp = value; }
         public int Type { get => type; private set => type = value; }
         public string Name { get => name; set => name = value; }
+        public Weapon Weapon { get => weapon; set => weapon = value; }
 
         public void CalculateHP(int heal, int dmg)
         {
@@ -81,17 +82,17 @@ namespace Dungen_crawl
         {
             if (type < 3)
             {
-                if (weapon.Type == 1)
+                if (Weapon.Type == 1)
                 {
-                    return weapon.Dmg(str);
+                    return Weapon.Dmg(str);
                 }
-                else if (weapon.Type == 2)
+                else if (Weapon.Type == 2)
                 {
-                    return weapon.Dmg(dex);
+                    return Weapon.Dmg(dex);
                 }
                 else
                 {
-                    return weapon.Dmg(wis);
+                    return Weapon.Dmg(wis);
                 }
             }
             else

@@ -24,11 +24,11 @@ namespace Dungen_crawl
             wis = 15;
             con = 15;
             exp = 0;
-            level = 10;
+            level = 1;
             sp = 10;
-            hp = 100;
+            hp = 10 * con;
             levelup = 50;
-            maxhp = 100;
+            maxhp = 10 * con;
         }
 
         public int Str { get => str; set => str = value; }
@@ -38,9 +38,9 @@ namespace Dungen_crawl
         public int SP { get => sp; set => sp = value; }
         public int Exp { get => exp; private set => exp = value; }
         public int Level { get => level; private set => level = value; }
-        public int Hp { get => hp; private set => hp = value; }
+        public int Hp { get => hp; set => hp = value; }
         public int Levelup { get => levelup; private set => levelup = value; }
-        public int Maxhp { get => maxhp; private set => maxhp = value; }
+        public int Maxhp { get => maxhp; set => maxhp = value; }
 
         public void CalculateHP(int heal, int dmg)
         {
