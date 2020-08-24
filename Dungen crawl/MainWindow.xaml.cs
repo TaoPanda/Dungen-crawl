@@ -25,6 +25,8 @@ namespace Dungen_crawl
         List<Enemy> enemies = new List<Enemy>();
         List<Weapon> weapons = new List<Weapon>();
         Weapon equiped = new Weapon(0, 0, 0, 0, 0);
+        int target = 0;
+        int enemyNumber = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -35,6 +37,18 @@ namespace Dungen_crawl
             Con.Text = "Con: " + player.Con;
             Level.Text = "Lv: " + player.Level;
             Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+            EnemyHP1.Text = "";
+            EnemyLevel1.Text = "";
+            EnemyName1.Text = "";
+            EnemyHP2.Text = "";
+            EnemyLevel2.Text = "";
+            EnemyName2.Text = "";
+            EnemyHP3.Text = "";
+            EnemyLevel3.Text = "";
+            EnemyName3.Text = "";
+            weapons.Add(new Weapon(1, 0, 0, 0));
+            weapons.Add(new Weapon(2, 0, 0, 0));
+            weapons.Add(new Weapon(3, 0, 0, 0));
         }
 
         private void Attack_Click(object sender, RoutedEventArgs e)
@@ -44,6 +58,9 @@ namespace Dungen_crawl
 
         private void NextRoom_Click(object sender, RoutedEventArgs e)
         {
+            enemyNumber = 0;
+            target = 1;
+            Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
             EnemyHP1.Text = "";
             EnemyLevel1.Text = "";
             EnemyName1.Text = "";
@@ -58,6 +75,7 @@ namespace Dungen_crawl
             //Next_Room.IsEnabled = false;
             foreach(Enemy enemy in enemies)
             {
+                enemyNumber++;
                 index++;
                 if(index == 1)
                 {
@@ -124,5 +142,43 @@ namespace Dungen_crawl
             }
         }
 
+        private void Switch_target_Click(object sender, RoutedEventArgs e)
+        {
+            target++;
+            if(target > enemyNumber)
+            {
+                target = 1;
+            }
+            Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
+            Target2.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
+            Target3.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
+            if(target == 1)
+            {
+                Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
+            }
+            else if (target == 2)
+            {
+                Target2.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
+            }
+            else if (target == 3)
+            {
+                Target3.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
+            }
+        }
+
+        private void Sword_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Bow_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Magic_staff_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

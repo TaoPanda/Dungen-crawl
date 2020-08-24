@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dungen_crawl"
         mc:Ignorable="d"
-        Title="Dungen crawl" Height="450" Width="800">
+        Title="Dungen crawl" Height="450" Width="820">
     <Grid>
-        <Button Content="Attack" HorizontalAlignment="Left" Margin="127,333,0,0" VerticalAlignment="Top" Click="Attack_Click"/>
-        <Button Content="Switch weapon" HorizontalAlignment="Left" Margin="104,362,0,0" VerticalAlignment="Top"/>
-        <Button Content="Sword" HorizontalAlignment="Left" Margin="30,335,0,0" VerticalAlignment="Top"/>
-        <Button Content="Bow" HorizontalAlignment="Left" Margin="35,358,0,0" VerticalAlignment="Top"/>
-        <Button Content="Magic staff" HorizontalAlignment="Left" Margin="17,383,0,0" VerticalAlignment="Top"/>
-        <Button Content="Next room" HorizontalAlignment="Left" Margin="516,147,0,0" VerticalAlignment="Top" Name="Next_Room" Click="NextRoom_Click"/>
+        <Button Content="Attack" HorizontalAlignment="Left" IsEnabled="False" Margin="127,333,0,0" VerticalAlignment="Top" Click="Attack_Click"/>
+        <Button Content="Switch weapon" HorizontalAlignment="Left" IsEnabled="False" Margin="104,358,0,0" VerticalAlignment="Top"/>
+        <Button Content="Sword" Name="Sword" HorizontalAlignment="Left" Margin="30,335,0,0" VerticalAlignment="Top" Click="Sword_Click"/>
+        <Button Content="Bow" Name="Bow" HorizontalAlignment="Left" Margin="35,358,0,0" VerticalAlignment="Top" Click="Bow_Click"/>
+        <Button Content="Magic staff" Name="Magic_staff" HorizontalAlignment="Left" Margin="17,383,0,0" VerticalAlignment="Top" Click="Magic_staff_Click"/>
+        <Button Content="Next room" HorizontalAlignment="Left" IsEnabled="False" Margin="525,151,0,0" VerticalAlignment="Top" Name="Next_Room" Click="NextRoom_Click"/>
         <Button Content=" + " HorizontalAlignment="Left" Margin="369,310,0,0" VerticalAlignment="Top" Click="Str_Click"/>
         <Button Content=" + " HorizontalAlignment="Left" Margin="369,335,0,0" VerticalAlignment="Top" Click="Dex_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="396,387,0,0" Text="Con" Name="Con" TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -22,17 +22,21 @@
         <Button Content=" + " HorizontalAlignment="Left" Margin="369,360,0,0" VerticalAlignment="Top" Click="Wis_Click"/>
         <Button Content=" + " HorizontalAlignment="Left" Margin="369,385,0,0" VerticalAlignment="Top" Click="Con_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="130,238,0,0" Text="Player" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="234,349,0,0" Text="HP" Name="Hp" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Right" Margin="0,111,241,0" Text="" Name="EnemyName1" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="524,90,0,0" Text="" Name="EnemyHP1" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="564,111,0,0" Text="" Name="EnemyLevel1" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Right" Margin="0,111,339,0" Text="" Name="EnemyName2" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="427,90,0,0" Text="" Name="EnemyHP2" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="466,111,0,0" Text="" Name="EnemyLevel2" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Right" Margin="0,111,153,0" Text="" Name="EnemyName3" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="613,90,0,0" Text="" Name="EnemyHP3" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="652,111,0,0" Text="" Name="EnemyLevel3" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="234,335,0,0" Text="Lv" Name="Level" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="275,352,0,0" Text="HP" Name="Hp" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.449,0.449"/>
+        <TextBlock HorizontalAlignment="Left" Margin="518,127,0,0" Text="Goblin" Name="EnemyName1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="524,109,0,0" Text="HP: 5/5" Name="EnemyHP1" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="567,127,0,0" Text="Lv: 1" Name="EnemyLevel1" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.524,0.347"/>
+        <TextBlock HorizontalAlignment="Left" Margin="518,86,0,0" Text="Orc" Name="EnemyName2" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.532,0.555"/>
+        <TextBlock HorizontalAlignment="Left" Margin="525,71,0,0" Text="HP: 50/50" Name="EnemyHP2" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="567,86,0,0" Text="Lv: 6" Name="EnemyLevel2" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="518,48,0,0" Text="Dragon" Name="EnemyName3" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="523,30,0,0" Text="HP: 250/250" Name="EnemyHP3" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="567,48,0,0" Text="Lv: 10" Name="EnemyLevel3" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="277,322,0,0" Text="Lv" Name="Level" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="349,288,0,0" Text="Sp" Name="Sp" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button Content="Switch target" Name="Switch_target" IsEnabled="False" HorizontalAlignment="Left" Margin="109,383,0,0" VerticalAlignment="Top" Click="Switch_target_Click"/>
+        <Rectangle HorizontalAlignment="Left" Name="Target3" Height="37" Margin="516,30,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
+        <Rectangle HorizontalAlignment="Left" Name="Target1" Height="37" Margin="516,109,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
+        <Rectangle HorizontalAlignment="Left" Name="Target2" Height="37" Margin="516,69,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
     </Grid>
 </Window>
