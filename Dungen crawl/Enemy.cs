@@ -50,10 +50,10 @@ namespace Dungen_crawl
                 Name = "Dragon";
             }
             level = rnd.Next(1, playerLevel+1);
-            str = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
-            dex = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
-            wis = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
-            con = rnd.Next(1 + 3 * (type - 1), level * 8 * type - 3);
+            str = rnd.Next(1 + 3 * type, level * 8 * type - 3);
+            dex = rnd.Next(1 + 3 * type, level * 8 * type - 3);
+            wis = rnd.Next(1 + 3 * type, level * 8 * type - 3);
+            con = rnd.Next(1 + 3 * type, level * 8 * type - 3);
             hp = 5 * con;
             maxhp = 5 * con;
         }
@@ -69,15 +69,21 @@ namespace Dungen_crawl
         public string Name { get => name; set => name = value; }
         public Weapon Weapon { get => weapon; set => weapon = value; }
 
-        public void CalculateHP(int heal, int dmg)
+        public void CalculateHP(int dmg)
         {
             maxhp = 5 * con;
-            hp = hp + heal - dmg;
+            hp = hp - dmg;
             if (hp > maxhp)
             {
                 hp = maxhp;
             }
         }
+        
+        public int GiveExp()
+        {
+            return 2 * type * level;
+        }
+
         public int attack()
         {
             if (type < 3)

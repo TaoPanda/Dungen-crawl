@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Dungen crawl" Height="450" Width="820">
     <Grid>
-        <Button Content="Attack" HorizontalAlignment="Left" IsEnabled="False" Margin="127,333,0,0" VerticalAlignment="Top" Click="Attack_Click"/>
-        <Button Content="Switch weapon" HorizontalAlignment="Left" IsEnabled="False" Margin="104,358,0,0" VerticalAlignment="Top"/>
+        <Button Content="Attack" Name="Attack" HorizontalAlignment="Left" IsEnabled="False" Margin="127,333,0,0" VerticalAlignment="Top" Click="Attack_Click"/>
+        <Button Content="Switch weapon" Name="Switch_weapon" HorizontalAlignment="Left" IsEnabled="False" Margin="104,358,0,0" VerticalAlignment="Top" Click="Switch_weapon_Click"/>
         <Button Content="Sword" Name="Sword" HorizontalAlignment="Left" Margin="30,335,0,0" VerticalAlignment="Top" Click="Sword_Click"/>
         <Button Content="Bow" Name="Bow" HorizontalAlignment="Left" Margin="35,358,0,0" VerticalAlignment="Top" Click="Bow_Click"/>
         <Button Content="Magic staff" Name="Magic_staff" HorizontalAlignment="Left" Margin="17,383,0,0" VerticalAlignment="Top" Click="Magic_staff_Click"/>

@@ -24,9 +24,11 @@ namespace Dungen_crawl
         Player player = new Player();
         List<Enemy> enemies = new List<Enemy>();
         List<Weapon> weapons = new List<Weapon>();
-        Weapon equiped = new Weapon(0, 0, 0, 0, 0);
+        Weapon equiped = new Weapon(1, 0, 0, 0, 0);
         int target = 0;
         int enemyNumber = 0;
+        int enemysAlive = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,7 +55,35 @@ namespace Dungen_crawl
 
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
-
+            int index = 0;
+            enemies[target - 1].CalculateHP(equiped.Dmg(player.Attack(equiped.Type)));
+            foreach (Enemy enemy in enemies)
+            {
+                index++;
+                if (index == 1)
+                {
+                    EnemyHP1.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                }
+                else if (index == 2)
+                {
+                    EnemyHP2.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                }
+                else
+                {
+                    EnemyHP3.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                }
+                if (enemy.Hp > 0)
+                {
+                    player.CalculateHP(0, enemy.attack());
+                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                }
+                else
+                {
+                    player.CalculateExp(enemy.GiveExp());
+                    Level.Text = "Lv: " + player.Level;
+                    enemysAlive--;
+                }
+            }
         }
 
         private void NextRoom_Click(object sender, RoutedEventArgs e)
@@ -72,7 +102,8 @@ namespace Dungen_crawl
             EnemyName3.Text = "";
             int index = 0;
             enemies = combat.NewRoom(player.Level);
-            //Next_Room.IsEnabled = false;
+            Next_Room.IsEnabled = false;
+            Attack.IsEnabled = true;
             foreach(Enemy enemy in enemies)
             {
                 enemyNumber++;
@@ -95,6 +126,11 @@ namespace Dungen_crawl
                     EnemyLevel3.Text = "Lv: " + enemy.Level;
                     EnemyName3.Text = enemy.Name;
                 }
+            }
+            enemysAlive = enemyNumber;
+            if (enemyNumber > 1)
+            {
+                Switch_target.IsEnabled = true;
             }
         }
 
@@ -168,17 +204,87 @@ namespace Dungen_crawl
 
         private void Sword_Click(object sender, RoutedEventArgs e)
         {
-
+            equiped = weapons[0];
+            Switch_weapon.IsEnabled = true;
+            if (enemyNumber < 1)
+            {
+                Next_Room.IsEnabled = true;
+            }
+            else
+            {
+                Attack.IsEnabled = true;
+            }
+            Sword.IsEnabled = false;
+            Bow.IsEnabled = false;
+            Magic_staff.IsEnabled = false;
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy.Hp > 0)
+                {
+                    player.CalculateHP(0, enemy.attack());
+                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                }
+            }
         }
 
         private void Bow_Click(object sender, RoutedEventArgs e)
         {
-
+            equiped = weapons[1];
+            Switch_weapon.IsEnabled = true;
+            if (enemyNumber < 1)
+            {
+                Next_Room.IsEnabled = true;
+            }
+            else
+            {
+                Attack.IsEnabled = true;
+            }
+            Sword.IsEnabled = false;
+            Bow.IsEnabled = false;
+            Magic_staff.IsEnabled = false;
+            foreach (Enemy enemy in enemies)
+            {
+                if(enemy.Hp > 0)
+                {
+                    player.CalculateHP(0, enemy.attack());
+                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                }
+            }
         }
 
         private void Magic_staff_Click(object sender, RoutedEventArgs e)
         {
+            equiped = weapons[2];
+            Switch_weapon.IsEnabled = true;
+            if(enemyNumber < 1)
+            {
+            Next_Room.IsEnabled = true;
+            }
+            else
+            {
+                Attack.IsEnabled = true;
+            }
+            Sword.IsEnabled = false;
+            Bow.IsEnabled = false;
+            Magic_staff.IsEnabled = false;
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy.Hp > 0)
+                {
+                    player.CalculateHP(0, enemy.attack());
+                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                }
+            }
+        }
 
+        private void Switch_weapon_Click(object sender, RoutedEventArgs e)
+        {
+            Sword.IsEnabled = true;
+            Bow.IsEnabled = true;
+            Magic_staff.IsEnabled = true;
+            Switch_weapon.IsEnabled = false;
+            Next_Room.IsEnabled = false;
+            Attack.IsEnabled = false;
         }
     }
 }

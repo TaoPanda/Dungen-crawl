@@ -24,7 +24,7 @@ namespace Dungen_crawl
             wis = 15;
             con = 15;
             exp = 0;
-            level = 10;
+            level = 1;
             sp = 10;
             hp = 10 * con;
             levelup = 50;
@@ -59,8 +59,24 @@ namespace Dungen_crawl
             {
                 level++;
                 exp = exp - levelup;
-                levelup = levelup + Convert.ToInt32(Math.Round(levelup * 0.25));
-                sp += 5;
+                levelup = levelup + Convert.ToInt32(Math.Round(levelup * 0.4));
+                sp += 10;
+            }
+        }
+
+        public int Attack(int type)
+        {
+            if(type == 1)
+            {
+                return str;
+            }
+            else if (type == 2)
+            {
+                return dex;
+            }
+            else
+            {
+                return wis;
             }
         }
     }
