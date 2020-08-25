@@ -27,7 +27,7 @@ namespace Dungen_crawl
             level = 1;
             sp = 10;
             hp = 10 * con;
-            levelup = 50;
+            levelup = 20;
             maxhp = 10 * con;
         }
 

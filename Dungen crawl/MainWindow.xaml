@@ -38,5 +38,7 @@
         <Rectangle HorizontalAlignment="Left" Name="Target3" Height="37" Margin="516,30,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
         <Rectangle HorizontalAlignment="Left" Name="Target1" Height="37" Margin="516,109,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
         <Rectangle HorizontalAlignment="Left" Name="Target2" Height="37" Margin="516,69,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
+        <Button Content="Heal" Name="Heal" HorizontalAlignment="Left" Margin="275,373,0,0" VerticalAlignment="Top" IsEnabled = "False" Click="Heal_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="306,375,0,0" Text="0" Name="HealUses" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 </Window>

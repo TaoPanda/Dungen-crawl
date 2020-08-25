@@ -28,6 +28,8 @@ namespace Dungen_crawl
         int target = 0;
         int enemyNumber = 0;
         int enemysAlive = 0;
+        int healUses = 0;
+        Random rnd = new Random();
 
         public MainWindow()
         {
@@ -62,26 +64,72 @@ namespace Dungen_crawl
                 index++;
                 if (index == 1)
                 {
-                    EnemyHP1.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                    if (enemy.Hp > -99999)
+                    {
+                        EnemyHP1.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                    }
                 }
                 else if (index == 2)
                 {
-                    EnemyHP2.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                    if (enemy.Hp > -99999)
+                    {
+                        EnemyHP2.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                    }
                 }
                 else
                 {
-                    EnemyHP3.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                    if (enemy.Hp > -99999)
+                    {
+                        EnemyHP3.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
+                    }
                 }
                 if (enemy.Hp > 0)
                 {
                     player.CalculateHP(0, enemy.attack());
                     Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                    if (player.Hp < 1)
+                    {
+                        Sword.IsEnabled = false;
+                        Bow.IsEnabled = false;
+                        Magic_staff.IsEnabled = false;
+                        Switch_weapon.IsEnabled = false;
+                        Next_Room.IsEnabled = false;
+                        Attack.IsEnabled = false;
+                        Switch_target.IsEnabled = false;
+                        Heal.IsEnabled = false;
+                    }
                 }
-                else
+                else if (enemy.Hp < 1 && enemy.Hp > -99999)
                 {
                     player.CalculateExp(enemy.GiveExp());
                     Level.Text = "Lv: " + player.Level;
+                    Sp.Text = "Sp: " + player.SP;
                     enemysAlive--;
+                    enemy.Hp = -99999999;
+                    if(enemysAlive < 1)
+                    {
+                        EnemyHP1.Text = "";
+                        EnemyLevel1.Text = "";
+                        EnemyName1.Text = "";
+                        EnemyHP2.Text = "";
+                        EnemyLevel2.Text = "";
+                        EnemyName2.Text = "";
+                        EnemyHP3.Text = "";
+                        EnemyLevel3.Text = "";
+                        EnemyName3.Text = "";
+                        Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
+                        Target2.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
+                        Target3.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
+                        Next_Room.IsEnabled = true;
+                        Attack.IsEnabled = false;
+                        Switch_target.IsEnabled = false;
+                        healUses += rnd.Next(0, 2);
+                        if (healUses > 0)
+                        {
+                            Heal.IsEnabled = true;
+                        }
+                        HealUses.Text = Convert.ToString(healUses);
+                    }
                 }
             }
         }
@@ -91,15 +139,6 @@ namespace Dungen_crawl
             enemyNumber = 0;
             target = 1;
             Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
-            EnemyHP1.Text = "";
-            EnemyLevel1.Text = "";
-            EnemyName1.Text = "";
-            EnemyHP2.Text = "";
-            EnemyLevel2.Text = "";
-            EnemyName2.Text = "";
-            EnemyHP3.Text = "";
-            EnemyLevel3.Text = "";
-            EnemyName3.Text = "";
             int index = 0;
             enemies = combat.NewRoom(player.Level);
             Next_Room.IsEnabled = false;
@@ -206,13 +245,21 @@ namespace Dungen_crawl
         {
             equiped = weapons[0];
             Switch_weapon.IsEnabled = true;
-            if (enemyNumber < 1)
+            if (enemysAlive < 1)
             {
                 Next_Room.IsEnabled = true;
             }
             else
             {
+                if (enemyNumber > 1)
+                {
+                    Switch_target.IsEnabled = true;
+                }
                 Attack.IsEnabled = true;
+            }
+            if (healUses > 0)
+            {
+                Heal.IsEnabled = true;
             }
             Sword.IsEnabled = false;
             Bow.IsEnabled = false;
@@ -223,6 +270,17 @@ namespace Dungen_crawl
                 {
                     player.CalculateHP(0, enemy.attack());
                     Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                    if (player.Hp < 1)
+                    {
+                        Sword.IsEnabled = false;
+                        Bow.IsEnabled = false;
+                        Magic_staff.IsEnabled = false;
+                        Switch_weapon.IsEnabled = false;
+                        Next_Room.IsEnabled = false;
+                        Attack.IsEnabled = false;
+                        Switch_target.IsEnabled = false;
+                        Heal.IsEnabled = false;
+                    }
                 }
             }
         }
@@ -231,13 +289,21 @@ namespace Dungen_crawl
         {
             equiped = weapons[1];
             Switch_weapon.IsEnabled = true;
-            if (enemyNumber < 1)
+            if (enemysAlive < 1)
             {
                 Next_Room.IsEnabled = true;
             }
             else
             {
+                if (enemyNumber > 1)
+                {
+                    Switch_target.IsEnabled = true;
+                }
                 Attack.IsEnabled = true;
+            }
+            if (healUses > 0)
+            {
+                Heal.IsEnabled = true;
             }
             Sword.IsEnabled = false;
             Bow.IsEnabled = false;
@@ -248,6 +314,17 @@ namespace Dungen_crawl
                 {
                     player.CalculateHP(0, enemy.attack());
                     Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                    if (player.Hp < 1)
+                    {
+                        Sword.IsEnabled = false;
+                        Bow.IsEnabled = false;
+                        Magic_staff.IsEnabled = false;
+                        Switch_weapon.IsEnabled = false;
+                        Next_Room.IsEnabled = false;
+                        Attack.IsEnabled = false;
+                        Switch_target.IsEnabled = false;
+                        Heal.IsEnabled = false;
+                    }
                 }
             }
         }
@@ -256,13 +333,21 @@ namespace Dungen_crawl
         {
             equiped = weapons[2];
             Switch_weapon.IsEnabled = true;
-            if(enemyNumber < 1)
+            if(enemysAlive < 1)
             {
             Next_Room.IsEnabled = true;
             }
             else
             {
+                if (enemyNumber > 1)
+                {
+                    Switch_target.IsEnabled = true;
+                }
                 Attack.IsEnabled = true;
+            }
+            if (healUses > 0)
+            {
+                Heal.IsEnabled = true;
             }
             Sword.IsEnabled = false;
             Bow.IsEnabled = false;
@@ -273,6 +358,17 @@ namespace Dungen_crawl
                 {
                     player.CalculateHP(0, enemy.attack());
                     Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                    if (player.Hp < 1)
+                    {
+                        Sword.IsEnabled = false;
+                        Bow.IsEnabled = false;
+                        Magic_staff.IsEnabled = false;
+                        Switch_weapon.IsEnabled = false;
+                        Next_Room.IsEnabled = false;
+                        Attack.IsEnabled = false;
+                        Switch_target.IsEnabled = false;
+                        Heal.IsEnabled = false;
+                    }
                 }
             }
         }
@@ -285,6 +381,20 @@ namespace Dungen_crawl
             Switch_weapon.IsEnabled = false;
             Next_Room.IsEnabled = false;
             Attack.IsEnabled = false;
+            Switch_target.IsEnabled = false;
+            Heal.IsEnabled = false;
+        }
+
+        private void Heal_Click(object sender, RoutedEventArgs e)
+        {
+            player.CalculateHP(Convert.ToInt32(Math.Round(Convert.ToDouble(player.Wis / 3))), 0);
+            Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+            healUses--;
+            if(healUses < 1)
+            {
+            Heal.IsEnabled = false;
+            }
+            HealUses.Text = Convert.ToString(healUses);
         }
     }
 }

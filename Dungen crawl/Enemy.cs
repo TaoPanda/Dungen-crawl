@@ -37,23 +37,31 @@ namespace Dungen_crawl
             {
                  Weapon = new Weapon(rnd.Next(1, 4), rnd.Next(2), rnd.Next(2), rnd.Next(2));
             }
+            level = rnd.Next(1, playerLevel+1);
             if(type == 1)
             {
                 Name = "Goblin";
+                str = rnd.Next(1 + 2 * type, level * 5 * type - 1);
+                dex = rnd.Next(1 + 2 * type, level * 5 * type - 1);
+                wis = rnd.Next(1 + 2 * type, level * 5 * type - 1);
+                con = rnd.Next(1 + 2 * type, level * 5 * type - 1);
             }
             else if(type == 2)
             {
                 Name = "Orc";
+                str = rnd.Next(1 + 2 * 2, level * 4 * 2 - 3);
+                dex = rnd.Next(1 + 2 * 2, level * 4 * 2 - 3);
+                wis = rnd.Next(1 + 2 * 2, level * 4 * 2 - 3);
+                con = rnd.Next(1 + 2 * 2, level * 4 * 2 - 3);
             }
             else
             {
                 Name = "Dragon";
+                str = rnd.Next(1 + 2 * 3, level * 3 * 3 - 2);
+                dex = rnd.Next(1 + 2 * 3, level * 3 * 3 - 2);
+                wis = rnd.Next(1 + 2 * 3, level * 3 * 3 - 2);
+                con = rnd.Next(1 + 2 * 3, level * 3 * 3 - 2);
             }
-            level = rnd.Next(1, playerLevel+1);
-            str = rnd.Next(1 + 3 * type, level * 8 * type - 3);
-            dex = rnd.Next(1 + 3 * type, level * 8 * type - 3);
-            wis = rnd.Next(1 + 3 * type, level * 8 * type - 3);
-            con = rnd.Next(1 + 3 * type, level * 8 * type - 3);
             hp = 5 * con;
             maxhp = 5 * con;
         }
@@ -63,7 +71,7 @@ namespace Dungen_crawl
         public int Wis { get => wis; set => wis = value; }
         public int Con { get => con; set => con = value; }
         public int Level { get => level; private set => level = value; }
-        public int Hp { get => hp; private set => hp = value; }
+        public int Hp { get => hp; set => hp = value; }
         public int Maxhp { get => maxhp; private set => maxhp = value; }
         public int Type { get => type; private set => type = value; }
         public string Name { get => name; set => name = value; }
