@@ -21,26 +21,16 @@ namespace Dungen_crawl
     public partial class MainWindow : Window
     {
         Combat combat = new Combat();
-        Player player = new Player();
-        List<Enemy> enemies = new List<Enemy>();
-        List<Weapon> weapons = new List<Weapon>();
-        Weapon equiped = new Weapon(1, 0, 0, 0, 0);
-        int target = 0;
-        int enemyNumber = 0;
-        int enemysAlive = 0;
-        int healUses = 0;
-        Random rnd = new Random();
-
         public MainWindow()
         {
             InitializeComponent();
-            Sp.Text = "Sp: " + player.SP;
-            Str.Text = "Str: " + player.Str;
-            Dex.Text = "Dex: " + player.Dex;
-            Wis.Text = "Wis: " + player.Wis;
-            Con.Text = "Con: " + player.Con;
-            Level.Text = "Lv: " + player.Level;
-            Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+            Sp.Text = "Sp: " + combat.Player.SP;
+            Str.Text = "Str: " + combat.Player.Str;
+            Dex.Text = "Dex: " + combat.Player.Dex;
+            Wis.Text = "Wis: " + combat.Player.Wis;
+            Con.Text = "Con: " + combat.Player.Con;
+            Level.Text = "Lv: " + combat.Player.Level;
+            Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
             EnemyHP1.Text = "";
             EnemyLevel1.Text = "";
             EnemyName1.Text = "";
@@ -50,16 +40,13 @@ namespace Dungen_crawl
             EnemyHP3.Text = "";
             EnemyLevel3.Text = "";
             EnemyName3.Text = "";
-            weapons.Add(new Weapon(1, 0, 0, 0));
-            weapons.Add(new Weapon(2, 0, 0, 0));
-            weapons.Add(new Weapon(3, 0, 0, 0));
         }
 
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
+            combat.Enemies[combat.Target - 1].CalculateHP(0, combat.Equiped.Dmg(combat.Player.Attack(combat.Equiped.Type)));
             int index = 0;
-            enemies[target - 1].CalculateHP(equiped.Dmg(player.Attack(equiped.Type)));
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in combat.Enemies)
             {
                 index++;
                 if (index == 1)
@@ -85,9 +72,9 @@ namespace Dungen_crawl
                 }
                 if (enemy.Hp > 0)
                 {
-                    player.CalculateHP(0, enemy.attack());
-                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
-                    if (player.Hp < 1)
+                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
+                    if (combat.Player.Hp < 1)
                     {
                         Sword.IsEnabled = false;
                         Bow.IsEnabled = false;
@@ -101,12 +88,12 @@ namespace Dungen_crawl
                 }
                 else if (enemy.Hp < 1 && enemy.Hp > -99999)
                 {
-                    player.CalculateExp(enemy.GiveExp());
-                    Level.Text = "Lv: " + player.Level;
-                    Sp.Text = "Sp: " + player.SP;
-                    enemysAlive--;
+                    combat.Player.CalculateExp(enemy.GiveExp());
+                    Level.Text = "Lv: " + combat.Player.Level;
+                    Sp.Text = "Sp: " + combat.Player.SP;
+                    combat.EnemyKilled();
                     enemy.Hp = -99999999;
-                    if(enemysAlive < 1)
+                    if(combat.EnemysAlive < 1)
                     {
                         EnemyHP1.Text = "";
                         EnemyLevel1.Text = "";
@@ -123,12 +110,12 @@ namespace Dungen_crawl
                         Next_Room.IsEnabled = true;
                         Attack.IsEnabled = false;
                         Switch_target.IsEnabled = false;
-                        healUses += rnd.Next(0, 2);
-                        if (healUses > 0)
+                        combat.HealUsesUp();
+                        if (combat.HealUses > 0)
                         {
                             Heal.IsEnabled = true;
                         }
-                        HealUses.Text = Convert.ToString(healUses);
+                        HealUses.Text = Convert.ToString(combat.HealUses);
                     }
                 }
             }
@@ -136,16 +123,15 @@ namespace Dungen_crawl
 
         private void NextRoom_Click(object sender, RoutedEventArgs e)
         {
-            enemyNumber = 0;
-            target = 1;
+            combat.EncounterReset();
+            combat.NewRoom();
             Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
             int index = 0;
-            enemies = combat.NewRoom(player.Level);
             Next_Room.IsEnabled = false;
             Attack.IsEnabled = true;
-            foreach(Enemy enemy in enemies)
+            foreach(Enemy enemy in combat.Enemies)
             {
-                enemyNumber++;
+                combat.EnemyAppear();
                 index++;
                 if(index == 1)
                 {
@@ -166,8 +152,7 @@ namespace Dungen_crawl
                     EnemyName3.Text = enemy.Name;
                 }
             }
-            enemysAlive = enemyNumber;
-            if (enemyNumber > 1)
+            if (combat.EnemysAlive > 1)
             {
                 Switch_target.IsEnabled = true;
             }
@@ -175,67 +160,61 @@ namespace Dungen_crawl
 
         private void Str_Click(object sender, RoutedEventArgs e)
         {
-            if(player.SP > 0)
+            if(combat.Player.SP > 0)
             {
-                player.SP--;
-                player.Str++;
-                Sp.Text = "Sp: " + player.SP;
-                Str.Text = "Str: " + player.Str;
+                combat.SkillPointDown();
+                combat.StrengthUp();
+                Sp.Text = "Sp: " + combat.Player.SP;
+                Str.Text = "Str: " + combat.Player.Str;
             }
         }
         private void Dex_Click(object sender, RoutedEventArgs e)
         {
-            if (player.SP > 0)
+            if (combat.Player.SP > 0)
             {
-                player.SP--;
-                player.Dex++;
-                Sp.Text = "Sp: " + player.SP;
-                Dex.Text = "Dex: " + player.Dex;
+                combat.SkillPointDown();
+                combat.DexterityUp();
+                Sp.Text = "Sp: " + combat.Player.SP;
+                Dex.Text = "Dex: " + combat.Player.Dex;
             }
         }
         private void Wis_Click(object sender, RoutedEventArgs e)
         {
-            if (player.SP > 0)
+            if (combat.Player.SP > 0)
             {
-                player.SP--;
-                player.Wis++;
-                Sp.Text = "Sp: " + player.SP;
-                Wis.Text = "Wis: " + player.Wis;
+                combat.SkillPointDown();
+                combat.WisdomUp();
+                Sp.Text = "Sp: " + combat.Player.SP;
+                Wis.Text = "Wis: " + combat.Player.Wis;
             }
         }
         private void Con_Click(object sender, RoutedEventArgs e)
         {
-            if (player.SP > 0)
+            if (combat.Player.SP > 0)
             {
-                player.SP--;
-                player.Con++;
-                Sp.Text = "Sp: " + player.SP;
-                Con.Text = "Con: " + player.Con;
-                player.Maxhp = 10 * player.Con;
-                player.Hp += 10; 
-                Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
+                combat.SkillPointDown();
+                combat.ConstitutionUp();
+                Sp.Text = "Sp: " + combat.Player.SP;
+                Con.Text = "Con: " + combat.Player.Con;
+                Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
             }
         }
 
         private void Switch_target_Click(object sender, RoutedEventArgs e)
         {
-            target++;
-            if(target > enemyNumber)
-            {
-                target = 1;
-            }
+            combat.NextTarget();
             Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
             Target2.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
             Target3.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
-            if(target == 1)
+            if(combat.Target == 1)
             {
                 Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
             }
-            else if (target == 2)
+            else if (combat.Target == 2)
             {
                 Target2.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
             }
-            else if (target == 3)
+            else if (combat.Target == 3)
             {
                 Target3.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
             }
@@ -243,34 +222,34 @@ namespace Dungen_crawl
 
         private void Sword_Click(object sender, RoutedEventArgs e)
         {
-            equiped = weapons[0];
+            combat.EquipWeapon(0);
             Switch_weapon.IsEnabled = true;
-            if (enemysAlive < 1)
+            if (combat.EnemysAlive < 1)
             {
                 Next_Room.IsEnabled = true;
             }
             else
             {
-                if (enemyNumber > 1)
+                if (combat.EnemyNumber > 1)
                 {
                     Switch_target.IsEnabled = true;
                 }
                 Attack.IsEnabled = true;
             }
-            if (healUses > 0)
+            if (combat.HealUses > 0)
             {
                 Heal.IsEnabled = true;
             }
             Sword.IsEnabled = false;
             Bow.IsEnabled = false;
             Magic_staff.IsEnabled = false;
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in combat.Enemies)
             {
                 if (enemy.Hp > 0)
                 {
-                    player.CalculateHP(0, enemy.attack());
-                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
-                    if (player.Hp < 1)
+                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
+                    if (combat.Player.Hp < 1)
                     {
                         Sword.IsEnabled = false;
                         Bow.IsEnabled = false;
@@ -287,34 +266,34 @@ namespace Dungen_crawl
 
         private void Bow_Click(object sender, RoutedEventArgs e)
         {
-            equiped = weapons[1];
+            combat.EquipWeapon(1);
             Switch_weapon.IsEnabled = true;
-            if (enemysAlive < 1)
+            if (combat.EnemysAlive < 1)
             {
                 Next_Room.IsEnabled = true;
             }
             else
             {
-                if (enemyNumber > 1)
+                if (combat.EnemyNumber > 1)
                 {
                     Switch_target.IsEnabled = true;
                 }
                 Attack.IsEnabled = true;
             }
-            if (healUses > 0)
+            if (combat.HealUses > 0)
             {
                 Heal.IsEnabled = true;
             }
             Sword.IsEnabled = false;
             Bow.IsEnabled = false;
             Magic_staff.IsEnabled = false;
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in combat.Enemies)
             {
                 if(enemy.Hp > 0)
                 {
-                    player.CalculateHP(0, enemy.attack());
-                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
-                    if (player.Hp < 1)
+                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
+                    if (combat.Player.Hp < 1)
                     {
                         Sword.IsEnabled = false;
                         Bow.IsEnabled = false;
@@ -331,34 +310,34 @@ namespace Dungen_crawl
 
         private void Magic_staff_Click(object sender, RoutedEventArgs e)
         {
-            equiped = weapons[2];
+            combat.EquipWeapon(2);
             Switch_weapon.IsEnabled = true;
-            if(enemysAlive < 1)
+            if(combat.EnemysAlive < 1)
             {
             Next_Room.IsEnabled = true;
             }
             else
             {
-                if (enemyNumber > 1)
+                if (combat.EnemyNumber > 1)
                 {
                     Switch_target.IsEnabled = true;
                 }
                 Attack.IsEnabled = true;
             }
-            if (healUses > 0)
+            if (combat.HealUses > 0)
             {
                 Heal.IsEnabled = true;
             }
             Sword.IsEnabled = false;
             Bow.IsEnabled = false;
             Magic_staff.IsEnabled = false;
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in combat.Enemies)
             {
                 if (enemy.Hp > 0)
                 {
-                    player.CalculateHP(0, enemy.attack());
-                    Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
-                    if (player.Hp < 1)
+                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
+                    if (combat.Player.Hp < 1)
                     {
                         Sword.IsEnabled = false;
                         Bow.IsEnabled = false;
@@ -387,14 +366,14 @@ namespace Dungen_crawl
 
         private void Heal_Click(object sender, RoutedEventArgs e)
         {
-            player.CalculateHP(Convert.ToInt32(Math.Round(Convert.ToDouble(player.Wis / 3))), 0);
-            Hp.Text = "HP: " + player.Hp + '/' + player.Maxhp;
-            healUses--;
-            if(healUses < 1)
+            combat.Player.CalculateHP(Convert.ToInt32(Math.Round(Convert.ToDouble(combat.Player.Wis / 3))), 0);
+            Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
+            combat.HealUsesDown();
+            if(combat.HealUses < 1)
             {
             Heal.IsEnabled = false;
             }
-            HealUses.Text = Convert.ToString(healUses);
+            HealUses.Text = Convert.ToString(combat.HealUses);
         }
     }
 }
