@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dungen_crawl
 {
-    public class Weapon
+    public class Weapon : Items
     {
         private int type;
         private int mod;
