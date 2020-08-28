@@ -24,7 +24,7 @@ namespace Dungen_crawl
             maxhp = hpMod * con;
         }
 
-        public override int Attack(int type)
+        public override int Attack(Weapon weapon)
         {
             dragAttack = rnd.Next(1, 4);
             if (dragAttack < 3)

@@ -8,9 +8,22 @@ namespace Dungen_crawl
     {
         int gold;
         List<Items> items;
+        Random rnd;
+        string shopName;
 
         public int Gold { get => gold; set => gold = value; }
+        public string ShopName { get => shopName; set => shopName = value; }
         internal List<Items> Items { get => items; set => items = value; }
+
+        public void GenerateItemShop()
+        {
+            shopName = "Item Shop";
+            items = new List<Items>();
+            for (int i = 0; i < 9; i++)
+            {
+
+            }
+        }
 
         public void GettingGold(int reward)
         {

@@ -9,6 +9,8 @@ namespace Dungen_crawl
         private int exp;
         private int sp;
         private int levelup;
+        private List<Weapon> weapons = new List<Weapon> { new Sword(0, 0, 0), new Bow(0, 0, 0), new Magic(0, 0, 0) };
+        private Weapon equiped = new Weapon(0, 0, 0);
 
         public Player()
         {
@@ -28,6 +30,8 @@ namespace Dungen_crawl
         public int Exp { get => exp; private set => exp = value; }
         public int Levelup { get => levelup; private set => levelup = value; }
         public int SP { get => sp; set => sp = value; }
+        public List<Weapon> Weapons { get => weapons; set => weapons = value; }
+        public Weapon Equiped { get => equiped; set => equiped = value; }
 
         public void CalculateExp(int points)
         {

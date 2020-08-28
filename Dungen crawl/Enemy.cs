@@ -10,15 +10,29 @@ namespace Dungen_crawl
         public string name;
         public Random rnd = new Random();
         public Weapon weapon;
+        int random;
+
 
         public Enemy(int playerLevel)
         {
+            random = rnd.Next(1, 4);
             name = "";
             str = 0;
             dex = 0;
             wis = 0;
             con = 0;
-            Weapon = new Weapon(rnd.Next(1, 4), rnd.Next(2), rnd.Next(2), rnd.Next(2));
+            if(random == 1)
+            {
+                weapon = new Sword(rnd.Next(2), rnd.Next(2), rnd.Next(2));
+            }
+            else if (random == 2)
+            {
+                weapon = new Bow(rnd.Next(2), rnd.Next(2), rnd.Next(2));
+            }
+            else
+            {
+                weapon = new Magic(1, rnd.Next(2), rnd.Next(2), rnd.Next(2));
+            }
             level = rnd.Next(1, playerLevel+1);
             hpMod = 5;
             hp = 0;
@@ -27,26 +41,11 @@ namespace Dungen_crawl
 
         public string Name { get => name; set => name = value; }
         public Weapon Weapon { get => weapon; set => weapon = value; }
-        
+
         public int GiveExp()
         {
             return 2 * type * level;
         }
 
-        public override int Attack(int type)
-        {
-            if (Weapon.Type == 1)
-            {
-                return Weapon.Dmg(str);
-            }
-            else if (Weapon.Type == 2)
-            {
-                return Weapon.Dmg(dex);
-            }
-            else
-            {
-                return Weapon.Dmg(wis);
-            }
-        }
     }
 }

@@ -44,7 +44,7 @@ namespace Dungen_crawl
 
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
-            combat.Enemies[combat.Target - 1].CalculateHP(0, combat.Equiped.Dmg(combat.Player.Attack(combat.Equiped.Type)));
+            combat.Enemies[combat.Target - 1].CalculateHP(0, combat.Player.Equiped.Dmg(combat.Player.Attack(combat.Player.Equiped)));
             int index = 0;
             foreach (Enemy enemy in combat.Enemies)
             {
@@ -72,7 +72,7 @@ namespace Dungen_crawl
                 }
                 if (enemy.Hp > 0)
                 {
-                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    combat.Player.CalculateHP(0, enemy.Attack(enemy.Weapon));
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {
@@ -247,7 +247,7 @@ namespace Dungen_crawl
             {
                 if (enemy.Hp > 0)
                 {
-                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    combat.Player.CalculateHP(0, enemy.Attack(enemy.Weapon));
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {
@@ -291,7 +291,7 @@ namespace Dungen_crawl
             {
                 if(enemy.Hp > 0)
                 {
-                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    combat.Player.CalculateHP(0, enemy.Attack(enemy.Weapon));
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {
@@ -335,7 +335,7 @@ namespace Dungen_crawl
             {
                 if (enemy.Hp > 0)
                 {
-                    combat.Player.CalculateHP(0, enemy.Attack(0));
+                    combat.Player.CalculateHP(0, enemy.Attack(enemy.Weapon));
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {

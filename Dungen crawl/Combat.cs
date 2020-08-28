@@ -9,8 +9,6 @@ namespace Dungen_crawl
         Random rnd = new Random();
         Player player = new Player();
         List<Enemy> enemies = new List<Enemy>();
-        List<Weapon> weapons = new List<Weapon> { new Weapon(1, 0, 0, 0), new Weapon(2, 0, 0, 0), new Weapon(3, 0, 0, 0) };
-        Weapon equiped = new Weapon(1, 0, 0, 0);
         int target = 0;
         int enemyNumber = 0;
         int enemysAlive = 0;
@@ -19,8 +17,6 @@ namespace Dungen_crawl
 
         public Player Player { get => player; set => player = value; }
         public List<Enemy> Enemies { get => enemies; set => enemies = value; }
-        public List<Weapon> Weapons { get => weapons; set => weapons = value; }
-        public Weapon Equiped { get => equiped; set => equiped = value; }
         public int Target { get => target; set => target = value; }
         public int EnemyNumber { get => enemyNumber; set => enemyNumber = value; }
         public int EnemysAlive { get => enemysAlive; set => enemysAlive = value; }
@@ -85,7 +81,7 @@ namespace Dungen_crawl
 
         public void EquipWeapon(int index)
         {
-            equiped = weapons[index];
+            player.Equiped = player.Weapons[index];
         }
 
         public void HealUsesDown()

@@ -6,62 +6,28 @@ namespace Dungen_crawl
 {
     public class Weapon : Items
     {
-        private int type;
-        private int mod;
-        private int hit;
-        private int crt;
-        private int dmgmod;
-        private Random rnd = new Random();
+        public double mod;
+        public int hit;
+        public int crt;
+        public int dmgmod;
+        public Random rnd = new Random();
 
-        public Weapon(int type, int mod, int hitmod, int crtmod, int dmgmod)
+        public Weapon(int mod, int hitmod, int crtmod, int dmgmod)
         {
-            this.type = type;
             this.mod = mod;
-            this.Dmgmod = dmgmod;
-            if(type == 1) 
-            {
-                hit = 95;
-                crt = 10;
-            }
-            else if (type == 2)
-            {
-                hit = 75;
-                crt = 40;
-            }
-            else if (type == 3)
-            {
-                hit = 85;
-                crt = 20;
-            }
+            this.dmgmod = dmgmod;
             hit += hitmod;
             crt += crtmod;
         }
-        public Weapon(int type, int hitmod, int crtmod, int dmgmod)
+        public Weapon(int hitmod, int crtmod, int dmgmod)
         {
-            this.type = type;
             this.mod = 1;
             this.Dmgmod = dmgmod;
-            if (type == 1)
-            {
-                hit = 95;
-                crt = 10;
-            }
-            else if (type == 2)
-            {
-                hit = 75;
-                crt = 40;
-            }
-            else if (type == 3)
-            {
-                hit = 85;
-                crt = 20;
-            }
             hit += hitmod;
             crt += crtmod;
         }
 
-        public int Type { get => type; private set => type = value; }
-        public int Mod { get => mod; private set => mod = value; }
+        public double Mod { get => mod; private set => mod = value; }
         public int Hit { get => hit; private set => hit = value; }
         public int Crt { get => crt; private set => crt = value; }
         public int Dmgmod { get => dmgmod; private set => dmgmod = value; }

@@ -33,19 +33,19 @@ namespace Dungen_crawl
             }
         }
 
-        public virtual int Attack(int type)
+        public virtual int Attack(Weapon weapon)
         {
-            if (type == 1)
+            if (weapon is Sword)
             {
-                return str;
+                return weapon.Dmg(str);
             }
-            else if (type == 2)
+            else if (weapon is Bow)
             {
-                return dex;
+                return weapon.Dmg(dex);
             }
             else
             {
-                return wis;
+                return weapon.Dmg(wis);
             }
         }
     }
