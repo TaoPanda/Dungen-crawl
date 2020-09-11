@@ -31,15 +31,17 @@ namespace Dungen_crawl
             Con.Text = "Con: " + combat.Player.Con;
             Level.Text = "Lv: " + combat.Player.Level;
             Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
-            EnemyHP1.Text = "";
-            EnemyLevel1.Text = "";
-            EnemyName1.Text = "";
-            EnemyHP2.Text = "";
-            EnemyLevel2.Text = "";
-            EnemyName2.Text = "";
-            EnemyHP3.Text = "";
-            EnemyLevel3.Text = "";
-            EnemyName3.Text = "";
+            EnemyHP1.Visibility = Visibility.Hidden;
+            EnemyLevel1.Visibility = Visibility.Hidden;
+            EnemyName1.Visibility = Visibility.Hidden;
+            EnemyHP2.Visibility = Visibility.Hidden;
+            EnemyLevel2.Visibility = Visibility.Hidden;
+            EnemyName2.Visibility = Visibility.Hidden;
+            EnemyHP3.Visibility = Visibility.Hidden;
+            EnemyLevel3.Visibility = Visibility.Hidden;
+            EnemyName3.Visibility = Visibility.Hidden;
+            PlayerName_grid.Visibility = Visibility.Visible;
+            Start_grid.Visibility = Visibility.Hidden;
         }
 
         private void Attack_Click(object sender, RoutedEventArgs e)
@@ -76,18 +78,19 @@ namespace Dungen_crawl
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {
-                        Sword.IsEnabled = false;
-                        Bow.IsEnabled = false;
-                        Magic_staff.IsEnabled = false;
-                        Switch_weapon.IsEnabled = false;
-                        Next_Room.IsEnabled = false;
-                        Attack.IsEnabled = false;
-                        Switch_target.IsEnabled = false;
-                        Heal.IsEnabled = false;
+                        Sword_btn.IsEnabled = false;
+                        Bow_btn.IsEnabled = false;
+                        Magic_staff_btn.IsEnabled = false;
+                        Switch_weapon_btn.IsEnabled = false;
+                        Next_Room_btn.IsEnabled = false;
+                        Attack_btn.IsEnabled = false;
+                        Switch_target_btn.IsEnabled = false;
+                        Heal_btn.IsEnabled = false;
                     }
                 }
                 else if (enemy.Hp < 1 && enemy.Hp > -99999)
                 {
+                    combat.Highscore.CalculateScore(enemy);
                     combat.Player.CalculateExp(enemy.GiveExp());
                     Level.Text = "Lv: " + combat.Player.Level;
                     Sp.Text = "Sp: " + combat.Player.SP;
@@ -95,25 +98,25 @@ namespace Dungen_crawl
                     enemy.Hp = -99999999;
                     if(combat.EnemysAlive < 1)
                     {
-                        EnemyHP1.Text = "";
-                        EnemyLevel1.Text = "";
-                        EnemyName1.Text = "";
-                        EnemyHP2.Text = "";
-                        EnemyLevel2.Text = "";
-                        EnemyName2.Text = "";
-                        EnemyHP3.Text = "";
-                        EnemyLevel3.Text = "";
-                        EnemyName3.Text = "";
+                        EnemyHP1.Visibility = Visibility.Hidden;
+                        EnemyLevel1.Visibility = Visibility.Hidden;
+                        EnemyName1.Visibility = Visibility.Hidden;
+                        EnemyHP2.Visibility = Visibility.Hidden;
+                        EnemyLevel2.Visibility = Visibility.Hidden;
+                        EnemyName2.Visibility = Visibility.Hidden;
+                        EnemyHP3.Visibility = Visibility.Hidden;
+                        EnemyLevel3.Visibility = Visibility.Hidden;
+                        EnemyName3.Visibility = Visibility.Hidden;
                         Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
                         Target2.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
                         Target3.Stroke = new SolidColorBrush(System.Windows.Media.Colors.White);
-                        Next_Room.IsEnabled = true;
-                        Attack.IsEnabled = false;
-                        Switch_target.IsEnabled = false;
+                        Next_Room_btn.Visibility = Visibility.Visible;
+                        Attack_btn.Visibility = Visibility.Hidden;
+                        Switch_target_btn.Visibility = Visibility.Hidden;
                         combat.HealUsesUp();
                         if (combat.HealUses > 0)
                         {
-                            Heal.IsEnabled = true;
+                            Heal_btn.IsEnabled = true;
                         }
                         HealUses.Text = Convert.ToString(combat.HealUses);
                     }
@@ -127,8 +130,8 @@ namespace Dungen_crawl
             combat.NewRoom();
             Target1.Stroke = new SolidColorBrush(System.Windows.Media.Colors.Black);
             int index = 0;
-            Next_Room.IsEnabled = false;
-            Attack.IsEnabled = true;
+            Next_Room_btn.Visibility = Visibility.Hidden;
+            Attack_btn.Visibility = Visibility.Visible;
             foreach(Enemy enemy in combat.Enemies)
             {
                 combat.EnemyAppear();
@@ -138,23 +141,32 @@ namespace Dungen_crawl
                     EnemyHP1.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
                     EnemyLevel1.Text = "Lv: " + enemy.Level;
                     EnemyName1.Text = enemy.Name;
+                    EnemyHP1.Visibility = Visibility.Visible;
+                    EnemyLevel1.Visibility = Visibility.Visible;
+                    EnemyName1.Visibility = Visibility.Visible;
                 }
                 else if (index == 2)
                 {
                     EnemyHP2.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
                     EnemyLevel2.Text = "Lv: " + enemy.Level;
                     EnemyName2.Text = enemy.Name;
+                    EnemyHP2.Visibility = Visibility.Visible;
+                    EnemyLevel2.Visibility = Visibility.Visible;
+                    EnemyName2.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     EnemyHP3.Text = "HP: " + enemy.Hp + '/' + enemy.Maxhp;
                     EnemyLevel3.Text = "Lv: " + enemy.Level;
                     EnemyName3.Text = enemy.Name;
+                    EnemyHP3.Visibility = Visibility.Visible;
+                    EnemyLevel3.Visibility = Visibility.Visible;
+                    EnemyName3.Visibility = Visibility.Visible;
                 }
             }
             if (combat.EnemysAlive > 1)
             {
-                Switch_target.IsEnabled = true;
+                Switch_target_btn.Visibility = Visibility.Visible;
             }
         }
 
@@ -223,26 +235,26 @@ namespace Dungen_crawl
         private void Sword_Click(object sender, RoutedEventArgs e)
         {
             combat.EquipWeapon(0);
-            Switch_weapon.IsEnabled = true;
+            Switch_weapon_btn.Visibility = Visibility.Visible;
             if (combat.EnemysAlive < 1)
             {
-                Next_Room.IsEnabled = true;
+                Next_Room_btn.Visibility = Visibility.Visible;
             }
             else
             {
                 if (combat.EnemyNumber > 1)
                 {
-                    Switch_target.IsEnabled = true;
+                    Switch_target_btn.Visibility = Visibility.Visible;
                 }
-                Attack.IsEnabled = true;
+                Attack_btn.Visibility = Visibility.Visible;
             }
             if (combat.HealUses > 0)
             {
-                Heal.IsEnabled = true;
+                Heal_btn.IsEnabled = true;
             }
-            Sword.IsEnabled = false;
-            Bow.IsEnabled = false;
-            Magic_staff.IsEnabled = false;
+            Sword_btn.Visibility = Visibility.Hidden;
+            Bow_btn.Visibility = Visibility.Hidden;
+            Magic_staff_btn.Visibility = Visibility.Hidden;
             foreach (Enemy enemy in combat.Enemies)
             {
                 if (enemy.Hp > 0)
@@ -251,14 +263,14 @@ namespace Dungen_crawl
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {
-                        Sword.IsEnabled = false;
-                        Bow.IsEnabled = false;
-                        Magic_staff.IsEnabled = false;
-                        Switch_weapon.IsEnabled = false;
-                        Next_Room.IsEnabled = false;
-                        Attack.IsEnabled = false;
-                        Switch_target.IsEnabled = false;
-                        Heal.IsEnabled = false;
+                        Sword_btn.IsEnabled = false;
+                        Bow_btn.IsEnabled = false;
+                        Magic_staff_btn.IsEnabled = false;
+                        Switch_weapon_btn.IsEnabled = false;
+                        Next_Room_btn.IsEnabled = false;
+                        Attack_btn.IsEnabled = false;
+                        Switch_target_btn.IsEnabled = false;
+                        Heal_btn.IsEnabled = false;
                     }
                 }
             }
@@ -267,26 +279,26 @@ namespace Dungen_crawl
         private void Bow_Click(object sender, RoutedEventArgs e)
         {
             combat.EquipWeapon(1);
-            Switch_weapon.IsEnabled = true;
+            Switch_weapon_btn.Visibility = Visibility.Visible;
             if (combat.EnemysAlive < 1)
             {
-                Next_Room.IsEnabled = true;
+                Next_Room_btn.Visibility = Visibility.Visible;
             }
             else
             {
                 if (combat.EnemyNumber > 1)
                 {
-                    Switch_target.IsEnabled = true;
+                    Switch_target_btn.Visibility = Visibility.Visible;
                 }
-                Attack.IsEnabled = true;
+                Attack_btn.Visibility = Visibility.Visible;
             }
             if (combat.HealUses > 0)
             {
-                Heal.IsEnabled = true;
+                Heal_btn.IsEnabled = true;
             }
-            Sword.IsEnabled = false;
-            Bow.IsEnabled = false;
-            Magic_staff.IsEnabled = false;
+            Sword_btn.Visibility = Visibility.Hidden;
+            Bow_btn.Visibility = Visibility.Hidden;
+            Magic_staff_btn.Visibility = Visibility.Hidden;
             foreach (Enemy enemy in combat.Enemies)
             {
                 if(enemy.Hp > 0)
@@ -295,14 +307,14 @@ namespace Dungen_crawl
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {
-                        Sword.IsEnabled = false;
-                        Bow.IsEnabled = false;
-                        Magic_staff.IsEnabled = false;
-                        Switch_weapon.IsEnabled = false;
-                        Next_Room.IsEnabled = false;
-                        Attack.IsEnabled = false;
-                        Switch_target.IsEnabled = false;
-                        Heal.IsEnabled = false;
+                        Sword_btn.IsEnabled = false;
+                        Bow_btn.IsEnabled = false;
+                        Magic_staff_btn.IsEnabled = false;
+                        Switch_weapon_btn.IsEnabled = false;
+                        Next_Room_btn.IsEnabled = false;
+                        Attack_btn.IsEnabled = false;
+                        Switch_target_btn.IsEnabled = false;
+                        Heal_btn.IsEnabled = false;
                     }
                 }
             }
@@ -311,26 +323,26 @@ namespace Dungen_crawl
         private void Magic_staff_Click(object sender, RoutedEventArgs e)
         {
             combat.EquipWeapon(2);
-            Switch_weapon.IsEnabled = true;
+            Switch_weapon_btn.Visibility = Visibility.Visible;
             if(combat.EnemysAlive < 1)
             {
-            Next_Room.IsEnabled = true;
+                Next_Room_btn.Visibility = Visibility.Visible;
             }
             else
             {
                 if (combat.EnemyNumber > 1)
                 {
-                    Switch_target.IsEnabled = true;
+                    Switch_target_btn.Visibility = Visibility.Visible;
                 }
-                Attack.IsEnabled = true;
+                Attack_btn.Visibility = Visibility.Visible;
             }
             if (combat.HealUses > 0)
             {
-                Heal.IsEnabled = true;
+                Heal_btn.IsEnabled = true;
             }
-            Sword.IsEnabled = false;
-            Bow.IsEnabled = false;
-            Magic_staff.IsEnabled = false;
+            Sword_btn.Visibility = Visibility.Hidden;
+            Bow_btn.Visibility = Visibility.Hidden;
+            Magic_staff_btn.Visibility = Visibility.Hidden;
             foreach (Enemy enemy in combat.Enemies)
             {
                 if (enemy.Hp > 0)
@@ -339,14 +351,14 @@ namespace Dungen_crawl
                     Hp.Text = "HP: " + combat.Player.Hp + '/' + combat.Player.Maxhp;
                     if (combat.Player.Hp < 1)
                     {
-                        Sword.IsEnabled = false;
-                        Bow.IsEnabled = false;
-                        Magic_staff.IsEnabled = false;
-                        Switch_weapon.IsEnabled = false;
-                        Next_Room.IsEnabled = false;
-                        Attack.IsEnabled = false;
-                        Switch_target.IsEnabled = false;
-                        Heal.IsEnabled = false;
+                        Sword_btn.IsEnabled = false;
+                        Bow_btn.IsEnabled = false;
+                        Magic_staff_btn.IsEnabled = false;
+                        Switch_weapon_btn.IsEnabled = false;
+                        Next_Room_btn.IsEnabled = false;
+                        Attack_btn.IsEnabled = false;
+                        Switch_target_btn.IsEnabled = false;
+                        Heal_btn.IsEnabled = false;
                     }
                 }
             }
@@ -354,14 +366,14 @@ namespace Dungen_crawl
 
         private void Switch_weapon_Click(object sender, RoutedEventArgs e)
         {
-            Sword.IsEnabled = true;
-            Bow.IsEnabled = true;
-            Magic_staff.IsEnabled = true;
-            Switch_weapon.IsEnabled = false;
-            Next_Room.IsEnabled = false;
-            Attack.IsEnabled = false;
-            Switch_target.IsEnabled = false;
-            Heal.IsEnabled = false;
+            Sword_btn.Visibility = Visibility.Visible;
+            Bow_btn.Visibility = Visibility.Visible;
+            Magic_staff_btn.Visibility = Visibility.Visible;
+            Switch_weapon_btn.Visibility = Visibility.Hidden;
+            Next_Room_btn.Visibility = Visibility.Hidden;
+            Attack_btn.Visibility = Visibility.Hidden;
+            Switch_target_btn.Visibility = Visibility.Hidden;
+            Heal_btn.IsEnabled = false;
         }
 
         private void Heal_Click(object sender, RoutedEventArgs e)
@@ -371,9 +383,64 @@ namespace Dungen_crawl
             combat.HealUsesDown();
             if(combat.HealUses < 1)
             {
-            Heal.IsEnabled = false;
+                Heal_btn.IsEnabled = false;
             }
             HealUses.Text = Convert.ToString(combat.HealUses);
+        }
+
+        private void Enter_btn_Click(object sender, RoutedEventArgs e)
+        {
+            WrongCharacter_warning.Foreground = Brushes.Black;
+            NoCharacter_warning.Foreground = Brushes.Black;
+            MaxCharacter_warning.Foreground = Brushes.Black; 
+            string playerName = PlayerName_input.Text;
+            if(playerName.Length > 10)
+            {
+                MaxCharacter_warning.Foreground = Brushes.Red;
+            }
+            if(playerName.Length == 0)
+            {
+                NoCharacter_warning.Foreground = Brushes.Red;
+            }
+            for(int i = 0; i < playerName.Length; i++)
+            {
+                char[] characters = playerName.ToCharArray();
+                if(characters[i] == ' ' || Convert.ToString(characters[i]) == "'")
+                {
+                    WrongCharacter_warning.Foreground = Brushes.Red;
+                }
+            }
+            if(WrongCharacter_warning.Foreground == Brushes.Black && NoCharacter_warning.Foreground == Brushes.Black && MaxCharacter_warning.Foreground == Brushes.Black)
+            {
+                PlayerName_grid.Visibility = Visibility.Hidden;
+                combat.Highscore.PlayerName = playerName;
+                Start_grid.Visibility = Visibility.Visible;
+                PlayerName.Text = playerName;
+            }
+            else
+            {
+                TryAgain_txtbox.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void InventoryOpen_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void InventoryClose_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ArrowDown_img_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ArrowUp_img_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Dungen_crawl
 
         public void GenerateItemShop()
         {
-            shopName = "Item Shop";
+            shopName = "Gobby's General Goods";
             items = new List<Items>();
             for (int i = 0; i < 9; i++)
             {

@@ -5,24 +5,147 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dungen_crawl"
         mc:Ignorable="d"
-        Title="Dungen crawl" Height="450" Width="820">
+        Title="Dungen crawl" Height="450" Width="820" MinHeight="450" MinWidth="820" SizeToContent="Height">
     <Grid>
-        <Button Content="Attack" Name="Attack" HorizontalAlignment="Left" IsEnabled="False" Margin="127,333,0,0" VerticalAlignment="Top" Click="Attack_Click"/>
-        <Button Content="Switch weapon" Name="Switch_weapon" HorizontalAlignment="Left" IsEnabled="False" Margin="104,358,0,0" VerticalAlignment="Top" Click="Switch_weapon_Click"/>
-        <Button Content="Sword" Name="Sword" HorizontalAlignment="Left" Margin="30,335,0,0" VerticalAlignment="Top" Click="Sword_Click"/>
-        <Button Content="Bow" Name="Bow" HorizontalAlignment="Left" Margin="35,358,0,0" VerticalAlignment="Top" Click="Bow_Click"/>
-        <Button Content="Magic staff" Name="Magic_staff" HorizontalAlignment="Left" Margin="17,383,0,0" VerticalAlignment="Top" Click="Magic_staff_Click"/>
-        <Button Content="Next room" HorizontalAlignment="Left" IsEnabled="False" Margin="525,151,0,0" VerticalAlignment="Top" Name="Next_Room" Click="NextRoom_Click"/>
-        <Button Content=" + " HorizontalAlignment="Left" Margin="369,310,0,0" VerticalAlignment="Top" Click="Str_Click"/>
-        <Button Content=" + " HorizontalAlignment="Left" Margin="369,335,0,0" VerticalAlignment="Top" Click="Dex_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="396,387,0,0" Text="Con" Name="Con" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="396,362,0,0" Text="Wis" Name="Wis" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="396,337,0,0" Text="Dex" Name="Dex" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="396,312,0,0" Text="Str" Name="Str" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Content=" + " HorizontalAlignment="Left" Margin="369,360,0,0" VerticalAlignment="Top" Click="Wis_Click"/>
-        <Button Content=" + " HorizontalAlignment="Left" Margin="369,385,0,0" VerticalAlignment="Top" Click="Con_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="130,238,0,0" Text="Player" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="275,352,0,0" Text="HP" Name="Hp" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.449,0.449"/>
+        <Grid Name="Start_grid">
+            <Grid Margin="0,0,403,165" x:Name="Inventory">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="29*"/>
+                    <ColumnDefinition Width="29*"/>
+                    <ColumnDefinition Width="266*"/>
+                    <ColumnDefinition Width="47*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="31*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity=".5"></SolidColorBrush>
+                </Grid.Background>
+                <Button Grid.Column="4" Grid.Row="13" Name="ArrowDown_img" Click="ArrowDown_img_Click">
+                    <Button.Background>
+                        <SolidColorBrush Opacity="0"></SolidColorBrush>
+                    </Button.Background>
+                    <Button.BorderBrush>
+                        <SolidColorBrush Opacity="0"></SolidColorBrush>
+                    </Button.BorderBrush>
+                    <Image Source="/Img/ArrowDown_img.png"/>
+                </Button>
+                <Button  Grid.Column="4" Grid.Row="1" Name="ArrowUp_img" Click="ArrowUp_img_Click">
+                    <Button.Background>
+                        <SolidColorBrush Opacity="0"></SolidColorBrush>
+                    </Button.Background>
+                    <Button.BorderBrush>
+                        <SolidColorBrush Opacity="0"></SolidColorBrush>
+                    </Button.BorderBrush>
+                    <Image Source="/Img/ArrowUp_img.png">
+                    </Image>
+                </Button>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" Text="Inventory" TextAlignment="Center" Grid.RowSpan="1">
+                    <TextBlock.Background>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </TextBlock.Background>
+                </TextBlock>
+                <Rectangle Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="7">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="5" Name="Discription_block" Text="" />
+                <Rectangle Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Item1_rectangle">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="2" Grid.Column="2" Name="Item1_block" Text="" />
+                <Image Source="/Img/Sword_icon.png" Grid.Column="1" Grid.Row="2" Name="Item1_img"/>
+                <TextBlock Grid.Row="2" Grid.Column="3" Name="Item1Count_block" Text="" />
+                <Rectangle Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Name="Item2_rectangle">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="4" Grid.Column="2" Name="Item2_block" Text="" />
+                <Image Source="/Img/Sword_icon.png" Grid.Column="1" Grid.Row="4" Name="Item2_img"/>
+                <TextBlock Grid.Row="4" Grid.Column="3" Name="Item2Count_block" Text="" />
+                <Rectangle Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Name="Item3_rectangle">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="6" Grid.Column="2" Name="Item3_block" Text="" />
+                <Image Source="/Img/Sword_icon.png" Grid.Column="1" Grid.Row="6" Name="Item3_img"/>
+                <TextBlock Grid.Row="6" Grid.Column="3" Name="Item3Count_block" Text="" />
+                <Rectangle Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" Name="Item4_rectangle">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="8" Grid.Column="2" Name="Item4_block" Text="" />
+                <Image Source="/Img/Sword_icon.png" Grid.Column="1" Grid.Row="8" Name="Item4_img"/>
+                <TextBlock Grid.Row="8" Grid.Column="3" Name="Item4Count_block" Text="" />
+                <Rectangle Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Name="Item5_rectangle">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="10" Grid.Column="2" Name="Item5_block" Text="" />
+                <Image Source="/Img/Sword_icon.png" Grid.Column="1" Grid.Row="10" Name="Item5_img"/>
+                <TextBlock Grid.Row="10" Grid.Column="3" Name="Item5Count_block" Text="" />
+                <Rectangle Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="3" Name="Item6_rectangle">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Black" Opacity=".25"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="12" Grid.Column="2" Name="Item6_block" Text="" />
+                <Image Source="/Img/Sword_icon.png" Grid.Column="1" Grid.Row="12" Name="Item6_img"/>
+                <TextBlock Grid.Row="12" Grid.Column="3" Name="Item6Count_block" Text="" />
+                <Button Content="X" Name="InventoryClose_btn" Grid.Column="4" Click="InventoryClose_btn_Click">
+                    <Button.Background>
+                        <SolidColorBrush Opacity="0"></SolidColorBrush>
+                    </Button.Background>
+                    <Button.BorderBrush>
+                        <SolidColorBrush Opacity="0"></SolidColorBrush>
+                    </Button.BorderBrush>
+                </Button>
+            </Grid>
+            <Button Content="Sword" Name="Sword_btn" HorizontalAlignment="Left" Margin="127,333,0,0" VerticalAlignment="Top" Click="Sword_Click"/>
+            <Button Content="Bow" Name="Bow_btn" HorizontalAlignment="Left" Margin="133,358,0,0" VerticalAlignment="Top" Click="Bow_Click"/>
+            <Button Content="Magic staff" Name="Magic_staff_btn" HorizontalAlignment="Left" Margin="115,385,0,0" VerticalAlignment="Top" Click="Magic_staff_Click"/>
+            <Button Content=" + " HorizontalAlignment="Left" Margin="369,310,0,0" VerticalAlignment="Top" Click="Str_Click"/>
+            <Button Content=" + " HorizontalAlignment="Left" Margin="369,385,0,0" VerticalAlignment="Top" Click="Con_Click"/>
+            <Button Content=" + " HorizontalAlignment="Left" Margin="369,335,0,0" VerticalAlignment="Top" Click="Dex_Click"/>
+            <Button Content=" + " HorizontalAlignment="Left" Margin="369,360,0,0" VerticalAlignment="Top" Click="Wis_Click"/>
+            <TextBlock HorizontalAlignment="Left" Margin="277,322,0,0" Text="Lv" Name="Level" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="349,288,0,0" Text="Sp" Name="Sp" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="396,387,0,0" Text="Con" Name="Con" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="396,337,0,0" Text="Dex" Name="Dex" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="396,362,0,0" Text="Wis" Name="Wis" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="396,312,0,0" Text="Str" Name="Str" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="114,288,0,0" Text="PlayerName" Name="PlayerName" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Left" Margin="275,352,0,0" Text="HP" Name="Hp" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.449,0.449"/>
+            <Button Content="Heal" Name="Heal_btn" HorizontalAlignment="Left" Margin="275,373,0,0" VerticalAlignment="Top" IsEnabled = "False" Click="Heal_Click"/>
+            <TextBlock HorizontalAlignment="Left" Margin="306,375,0,0" Text="0" Name="HealUses" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <Button Content="Inventory" x:Name="InventoryOpen_btn" HorizontalAlignment="Left" Margin="262,395,0,0" VerticalAlignment="Top" Click="InventoryOpen_btn_Click"/>
+        </Grid>
+        <Button Content="Attack" Visibility="Hidden" Name="Attack_btn" HorizontalAlignment="Left" Margin="127,333,0,0" VerticalAlignment="Top" Click="Attack_Click"/>
+        <Button Content="Switch weapon" Visibility="Hidden" Name="Switch_weapon_btn" HorizontalAlignment="Left"  Margin="104,358,0,0" VerticalAlignment="Top" Click="Switch_weapon_Click"/>
+        <Button Content="Next room" HorizontalAlignment="Left" Visibility="Hidden" Margin="525,151,0,0" VerticalAlignment="Top" Name="Next_Room_btn" Click="NextRoom_Click"/>
         <TextBlock HorizontalAlignment="Left" Margin="518,127,0,0" Text="Goblin" Name="EnemyName1" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="524,109,0,0" Text="HP: 5/5" Name="EnemyHP1" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="567,127,0,0" Text="Lv: 1" Name="EnemyLevel1" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.524,0.347"/>
@@ -32,13 +155,17 @@
         <TextBlock HorizontalAlignment="Left" Margin="518,48,0,0" Text="Dragon" Name="EnemyName3" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="523,30,0,0" Text="HP: 250/250" Name="EnemyHP3" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="567,48,0,0" Text="Lv: 10" Name="EnemyLevel3" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="277,322,0,0" Text="Lv" Name="Level" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="349,288,0,0" Text="Sp" Name="Sp" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Content="Switch target" Name="Switch_target" IsEnabled="False" HorizontalAlignment="Left" Margin="109,383,0,0" VerticalAlignment="Top" Click="Switch_target_Click"/>
+        <Button Content="Switch target" Name="Switch_target_btn" Visibility="Hidden" HorizontalAlignment="Left" Margin="109,383,0,0" VerticalAlignment="Top" Click="Switch_target_Click"/>
         <Rectangle HorizontalAlignment="Left" Name="Target3" Height="37" Margin="516,30,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
         <Rectangle HorizontalAlignment="Left" Name="Target1" Height="37" Margin="516,109,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
         <Rectangle HorizontalAlignment="Left" Name="Target2" Height="37" Margin="516,69,0,0" Stroke="White" VerticalAlignment="Top" Width="110"/>
-        <Button Content="Heal" Name="Heal" HorizontalAlignment="Left" Margin="275,373,0,0" VerticalAlignment="Top" IsEnabled = "False" Click="Heal_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="306,375,0,0" Text="0" Name="HealUses" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Grid Name="PlayerName_grid" Visibility="Hidden">
+            <TextBox Text="PlayerName" Name="PlayerName_input" TextWrapping="Wrap" Margin="372,196,362,218"/>
+            <TextBlock HorizontalAlignment="Center" Name="MaxCharacter_warning" Margin="0,180,0,0" Text="PlayerName can be a max of 10 characters." TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Center" Name="WrongCharacter_warning" Margin="0,164,0,0" Text="PlayerName can't involve spave or '." TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <TextBlock HorizontalAlignment="Center" Name="NoCharacter_warning" Margin="0,148,0,0" Text="PlayerName can't be empty." TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <Button Content="Enter" Margin="389,217,379,189" Click="Enter_btn_Click" VerticalAlignment="Stretch"/>
+            <TextBlock HorizontalAlignment="Center" Visibility="Hidden" Name="TryAgain_txtbox" Margin="0,132,0,0" Text="Try Again" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>

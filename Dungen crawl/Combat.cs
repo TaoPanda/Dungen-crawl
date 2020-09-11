@@ -9,6 +9,8 @@ namespace Dungen_crawl
         Random rnd = new Random();
         Player player = new Player();
         List<Enemy> enemies = new List<Enemy>();
+        Database database = new Database();
+        Highscore highscore = new Highscore("PlayerName", 0, 0, 0, 0);
         int target = 0;
         int enemyNumber = 0;
         int enemysAlive = 0;
@@ -21,6 +23,8 @@ namespace Dungen_crawl
         public int EnemyNumber { get => enemyNumber; set => enemyNumber = value; }
         public int EnemysAlive { get => enemysAlive; set => enemysAlive = value; }
         public int HealUses { get => healUses; set => healUses = value; }
+        internal Database Database { get => database; set => database = value; }
+        public Highscore Highscore { get => highscore; set => highscore = value; }
 
         public void NewRoom()
         {

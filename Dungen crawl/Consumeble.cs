@@ -14,10 +14,9 @@ namespace Dungen_crawl
         public int Level { get => level; set => level = value; }
         public int Effect { get => effect; set => effect = value; }
 
-        public virtual int Gained()
+        public virtual void Gained()
         {
             uses++;
-            return effect;
         }
 
         public virtual void Used()
