@@ -7,62 +7,54 @@ namespace Dungen_crawl
     public class Combat
     {
         Random rnd = new Random();
-        Player player = new Player();
         List<Enemy> enemies = new List<Enemy>();
-        Database database = new Database();
-        Highscore highscore = new Highscore("PlayerName", 0, 0, 0, 0);
         int target = 0;
         int enemyNumber = 0;
         int enemysAlive = 0;
-        int healUses = 0;
         int enemyType = 0;
 
-        public Player Player { get => player; set => player = value; }
         public List<Enemy> Enemies { get => enemies; set => enemies = value; }
         public int Target { get => target; set => target = value; }
         public int EnemyNumber { get => enemyNumber; set => enemyNumber = value; }
         public int EnemysAlive { get => enemysAlive; set => enemysAlive = value; }
-        public int HealUses { get => healUses; set => healUses = value; }
-        internal Database Database { get => database; set => database = value; }
-        public Highscore Highscore { get => highscore; set => highscore = value; }
 
-        public void NewRoom()
+        public void NewRoom(int playerLV)
         {
             enemies = new List<Enemy>();
             int rndNumber = rnd.Next(1000);
             if(rndNumber < 750)
             {
-                enemies.Add(RandomEnemy());
+                enemies.Add(RandomEnemy(playerLV));
             }
             else if(rndNumber < 950)
             {
-                enemies.Add(RandomEnemy());
-                enemies.Add(RandomEnemy());
+                enemies.Add(RandomEnemy(playerLV));
+                enemies.Add(RandomEnemy(playerLV));
             }
             else
             {
-                enemies.Add(RandomEnemy());
-                enemies.Add(RandomEnemy());
-                enemies.Add(RandomEnemy());
+                enemies.Add(RandomEnemy(playerLV));
+                enemies.Add(RandomEnemy(playerLV));
+                enemies.Add(RandomEnemy(playerLV));
             }
         }
 
-        public Enemy RandomEnemy()
+        public Enemy RandomEnemy(int playerLV)
         {
-            if(player.level < 6)
+            if(playerLV < 6)
             {
-                return new Goblin(player.level);
+                return new Goblin(playerLV);
             }
-            else if(player.level < 10)
+            else if(playerLV < 10)
             {
                 enemyType = rnd.Next(1, 3);
                 if (enemyType == 1)
                 {
-                    return new Goblin(player.level);
+                    return new Goblin(playerLV);
                 }
                 else
                 {
-                    return new Orc(player.level);
+                    return new Orc(playerLV);
                 }
             }
             else
@@ -70,32 +62,17 @@ namespace Dungen_crawl
             enemyType = rnd.Next(1, 4);
             if(enemyType == 1)
             {
-                return new Goblin(player.level);
+                return new Goblin(playerLV);
             }
             else if(enemyType == 2)
             {
-                return new Orc(player.level);
+                return new Orc(playerLV);
             }
             else
             {
-                return new Dragon(player.level);
+                return new Dragon(playerLV);
             }
             }
-        }
-
-        public void EquipWeapon(int index)
-        {
-            player.Equiped = player.Weapons[index];
-        }
-
-        public void HealUsesDown()
-        {
-            healUses--;
-        }
-
-        public void HealUsesUp()
-        {
-            healUses += rnd.Next(0, 2);
         }
 
         public void EncounterReset()
@@ -122,33 +99,6 @@ namespace Dungen_crawl
             {
                 target = 1;
             }
-        }
-
-        public void SkillPointDown()
-        {
-            player.SP--;
-        }
-
-        public void StrengthUp()
-        {
-            player.Str++;
-        }
-
-        public void DexterityUp()
-        {
-            player.Dex++;
-        }
-
-        public void WisdomUp()
-        {
-            player.Wis++;
-        }
-
-        public void ConstitutionUp()
-        {
-            player.Con++;
-            player.Maxhp = 10 * player.Con;
-            player.Hp += 10;
         }
     }
 }
