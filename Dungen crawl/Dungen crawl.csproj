@@ -8,7 +8,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ArrowDown_img.png" />
+    <None Remove="ArrowUp_img.png" />
+    <None Remove="Bow_icon.png" />
+    <None Remove="Magic-staff_icon.png" />
+    <None Remove="Medsurpply_icon.png" />
+    <None Remove="Potion_icon.png" />
+    <None Remove="Sword_icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ArrowDown_img.png" />
+    <Resource Include="ArrowUp_img.png" />
+    <Resource Include="Bow_icon.png" />
+    <Resource Include="Magic-staff_icon.png" />
+    <Resource Include="Medsurpply_icon.png" />
+    <Resource Include="Potion_icon.png" />
+    <Resource Include="Sword_icon.png" />
   </ItemGroup>
 
 </Project>

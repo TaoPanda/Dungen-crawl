@@ -36,16 +36,19 @@ namespace Dungen_crawl
             if(enemy is Goblin)
             {
                 typeMod = 5;
+                goblinsKilled++;
             }
             else if (enemy is Orc)
             {
                 typeMod = 25;
+                orcsKilled++;
             }
             else if(enemy is Dragon)
             {
                 typeMod = 100;
+                dragonsKilled++;
             }
-            Score = typeMod * lvMod + rnd.Next(0, 10);
+            Score += typeMod * lvMod + rnd.Next(0, 10);
         }
     }
 }

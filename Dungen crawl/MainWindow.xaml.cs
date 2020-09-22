@@ -425,7 +425,7 @@ namespace Dungen_crawl
 
         private void InventoryOpen_btn_Click(object sender, RoutedEventArgs e)
         {
-
+            business.BuildInventory();
         }
 
         private void InventoryClose_btn_Click(object sender, RoutedEventArgs e)
@@ -439,6 +439,11 @@ namespace Dungen_crawl
         }
 
         private void ArrowUp_img_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Use_btn_Click(object sender, RoutedEventArgs e)
         {
 
         }
